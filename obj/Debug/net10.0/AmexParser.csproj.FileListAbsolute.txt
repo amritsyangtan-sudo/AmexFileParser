@@ -1,0 +1,14 @@
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\bin\Debug\net10.0\AmexParser.exe
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\bin\Debug\net10.0\AmexParser.deps.json
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\bin\Debug\net10.0\AmexParser.runtimeconfig.json
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\bin\Debug\net10.0\AmexParser.dll
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\bin\Debug\net10.0\AmexParser.pdb
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\obj\Debug\net10.0\AmexParser.GeneratedMSBuildEditorConfig.editorconfig
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\obj\Debug\net10.0\AmexParser.AssemblyInfoInputs.cache
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\obj\Debug\net10.0\AmexParser.AssemblyInfo.cs
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\obj\Debug\net10.0\AmexParser.csproj.CoreCompileInputs.cache
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\obj\Debug\net10.0\AmexParser.dll
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\obj\Debug\net10.0\refint\AmexParser.dll
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\obj\Debug\net10.0\AmexParser.pdb
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\obj\Debug\net10.0\AmexParser.genruntimeconfig.cache
+D:\MISC\SET\SettlementProject\AmexParser\AmexParser\obj\Debug\net10.0\ref\AmexParser.dll
