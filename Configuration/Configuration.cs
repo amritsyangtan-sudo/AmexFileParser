@@ -27,7 +27,11 @@ public class Configuration
     public int TransactionCountStart {get;} = 97;
     public int TransactionCountLength {get;} = 11;
 
+    public int NostroPositionStart {get;} = 71 ;
+    public int NostroPositionLength {get;} = 2;
 
+    public int NostroAmountStart {get;} = 52;
+    public int NostroAmountLength {get;} = 19;
 
 
 }

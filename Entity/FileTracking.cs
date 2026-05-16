@@ -12,6 +12,6 @@ public class FileTracking
 }
 
 /*
-File Header | File Type | Processor Id | Sequence Number | Claim Date | Status | Transaction count |
+
 
 */

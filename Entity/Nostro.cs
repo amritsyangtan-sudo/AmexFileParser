@@ -1,9 +1,10 @@
 namespace AmexParser;
 public class Nostro
 {
-    public string FileHeader {get;set;} //ORGANIZATION - NET SETTLEMENT SUMMARY
+    public string FileHeader {get;set;} //NOSTRO
     public string SettlementCurrency {get;set;}
     public double GrossSettlement {get;set;}
+    public string GrossSettlementPosition {get;set;}
     public double PassThroughFees {get;set;}
     public string PassThroughFeesPosition {get;set;}
     public double NetworkFees {get;set;}
