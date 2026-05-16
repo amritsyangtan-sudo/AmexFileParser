@@ -30,12 +30,12 @@ public class FileTrackingParser
                 fileTrackingRecords.Add(new FileTracking
                 {
                     FileHeader = "File Tracking",
-                    FileType = currentFileType,
-                    ProcessorId = currentLine.Substring(_configuration.ProcessIdStart, _configuration.ProcessIdLength),
-                    SequenceNumber = currentLine.Substring(_configuration.SequenceStart, _configuration.SequenceLength),
-                    ClaimDate = currentLine.Substring(_configuration.ClaimDateStart, _configuration.ClaimDateLength),
-                    Status = currentLine.Substring(_configuration.StatusStart, _configuration.StatusLength),
-                    TransactionCount = int.Parse(currentLine.Substring(_configuration.TransactionCountStart, _configuration.TransactionCountLength))
+                    FileType = currentFileType.Trim(),
+                    ProcessorId = currentLine.Substring(_configuration.ProcessIdStart, _configuration.ProcessIdLength).Trim(),
+                    SequenceNumber = currentLine.Substring(_configuration.SequenceStart, _configuration.SequenceLength).Trim(),
+                    ClaimDate = currentLine.Substring(_configuration.ClaimDateStart, _configuration.ClaimDateLength).Trim(),
+                    Status = currentLine.Substring(_configuration.StatusStart, _configuration.StatusLength).Trim(),
+                    TransactionCount = int.Parse(currentLine.Substring(_configuration.TransactionCountStart, _configuration.TransactionCountLength).Trim())
                 });
             }
 
