@@ -14,7 +14,7 @@ public class Configuration
     public int SettlementCurrencyStart {get;} = 26;
     public int SettlementCurrencyLength {get;} = 3;
 
-    public int FileTypeStart {get;} = 1;
+    public int FileTypeStart {get;} = 0;
     public int FileTypeLength {get;} = 14;
     public int ProcessIdStart {get;} = 14;
     public int ProcessIdLength {get;} = 11;
@@ -22,7 +22,7 @@ public class Configuration
     public int SequenceLength {get;} = 7;
     public int ClaimDateStart {get;} = 44;
     public int ClaimDateLength {get;} = 7;
-    public int StatusStart {get;} = 68;
+    public int StatusStart {get;} = 67;
     public int StatusLength {get;} = 13;
     public int TransactionCountStart {get;} = 97;
     public int TransactionCountLength {get;} = 11;

@@ -11,10 +11,16 @@ class Program
         List<string> reports = fileReader.GetAllReport();
 
         ReportSectionIdentifier reportSectionIdentifier = new ReportSectionIdentifier();
-        List<string> fileTrackingReports = reportSectionIdentifier.ExtractReportSection(configuration.FileTrackingHeader,reports);
-        foreach(var a in fileTrackingReports)
+        FileTrackingParser filetrackingPraser = new FileTrackingParser(configuration);
+
+        List<string> fileTrackingReportSections = reportSectionIdentifier.ExtractReportSection(configuration.FileTrackingHeader,reports);
+        List<FileTracking> fileTrackingRecords = filetrackingPraser.FileTrackingParse(fileTrackingReportSections);
+       
+        foreach(var a in fileTrackingRecords)
         {
-            Console.WriteLine(a);
+            Console.WriteLine(a.FileHeader + "|" + a.FileType + "|" + a.ProcessorId + "|" + a.SequenceNumber + "|" + a.ClaimDate + "|" + a.Status + "|" + a.TransactionCount);
         }
     }
 }
+
+
