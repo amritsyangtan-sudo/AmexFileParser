@@ -13,7 +13,7 @@ public class SettlementSummaryParser
         string currentSettlementCurrency = "";
         string currentChannelType = "";
         string currentTransactionType = "";
-       // bool startOfTransactionDataRow = false;
+        // bool startOfTransactionDataRow = false;
         List<SettlementSummary> settlementSummaries = new List<SettlementSummary>();
         foreach (var currentLine in settlementReports)
         {
@@ -35,7 +35,7 @@ public class SettlementSummaryParser
             // {
             //     startOfTransactionDataRow = false;
             // }
-  
+
             if (IsSettlementDataRow(currentLine))
             {
                 settlementSummaries.Add(new SettlementSummary
@@ -62,7 +62,12 @@ public class SettlementSummaryParser
     }
 
     public bool IsTransactionTypeHeader(string line) => line.Contains("1ST PRESENTMENT") || line.Contains("CHARGEBACK") || line.Contains("CASH") || line.Contains("ATM ACQUIRER FEES");
-    public bool IsChannelTypeHeader(string line) => line.Trim().Contains("POS") || line.Trim().Contains("ATM");
+    public bool IsChannelTypeHeader(string line)
+    {
+        string value = line.Trim();
+
+        return value == "POS" || value == "ATM";
+    }
     public bool IsSettlementCurrencyHeader(string line) => line.Contains("SETTLEMENT CURRENCY CODE");
     public string GetSettlementCurrency(string line) => line.Substring(_configuration.SettlementCurrencyStart, _configuration.SettlementCurrencyLength).Trim();
     public string GetChannelType(string line) => line.Substring(_configuration.ChannelTypeStart, _configuration.ChannelTypeLength).Trim();
@@ -79,8 +84,9 @@ public class SettlementSummaryParser
 
     public bool IsSettlementDataRow(string line)
     {
-        string transactionCount = line.Substring(_configuration.SettlementTransactionCountStart,_configuration.SettlementTransactionCountLength).Trim();
-        return int.TryParse(transactionCount, out _);
+        string presentmentCurrency =line.Substring(_configuration.PresentmentCodeStart,_configuration.PresentmentCodeLength).Trim();
+        string transactionCount =line.Substring(_configuration.SettlementTransactionCountStart,_configuration.SettlementTransactionCountLength).Trim();
+        return int.TryParse(presentmentCurrency, out _) && int.TryParse(transactionCount, out _);
     }
 
 }
