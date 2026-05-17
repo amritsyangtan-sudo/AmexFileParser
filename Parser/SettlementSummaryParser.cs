@@ -13,10 +13,16 @@ public class SettlementSummaryParser
         string currentSettlementCurrency = "";
         string currentChannelType = "";
         string currentTransactionType = "";
+        string fileHeader = "";
         // bool startOfTransactionDataRow = false;
         List<SettlementSummary> settlementSummaries = new List<SettlementSummary>();
         foreach (var currentLine in settlementReports)
         {
+            if(currentLine.Contains("JULIAN DATE"))
+            {
+                fileHeader = GetReportType(currentLine)
+;            }
+
             if (IsSettlementCurrencyHeader(currentLine))
             {
                 currentSettlementCurrency = GetSettlementCurrency(currentLine);
@@ -40,7 +46,7 @@ public class SettlementSummaryParser
             {
                 settlementSummaries.Add(new SettlementSummary
                 {
-                    FileHeader = "Settlement Summary",
+                    FileHeader = fileHeader,
                     SettlementCurrency = currentSettlementCurrency,
                     ChannelType = currentChannelType,
                     TransactionType = currentTransactionType,
@@ -88,5 +94,7 @@ public class SettlementSummaryParser
         string transactionCount =line.Substring(_configuration.SettlementTransactionCountStart,_configuration.SettlementTransactionCountLength).Trim();
         return int.TryParse(presentmentCurrency, out _) && int.TryParse(transactionCount, out _);
     }
+    
+    public string GetReportType(string line) => line.Substring(_configuration.ReportTypeStart, _configuration.ReportTypeLength).Trim();
 
 }

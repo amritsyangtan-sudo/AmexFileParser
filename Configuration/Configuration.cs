@@ -33,7 +33,8 @@ public class Configuration
     public int NostroAmountStart {get;} = 52;
     public int NostroAmountLength {get;} = 19;
 
-
+    public int ReportTypeStart {get;} = 50;
+    public int ReportTypeLength {get;} = 8;
     public int ChannelTypeStart {get;} = 0;
     public int ChannelTypeLength {get;} = 3;
     public int SettlementTranasctionTypeStart {get;} = 1;

@@ -37,16 +37,16 @@ class Program
         }
         Console.WriteLine("--------------------------------------------------------------------------------------------");
 
-        // foreach(var a in issuerSettlementSection)
-        // {
-        //     Console.WriteLine(a);
-        // }
+        foreach(var a in issuerSettlementSection)
+        {
+            Console.WriteLine(a);
+        }
 
         List<SettlementSummary> issuerSettlementSummaries = settlementSummaryParser.SettlementSummaryParse(issuerSettlementSection);
         List<SettlementSummary> acquirerSettlemtnSummaries = settlementSummaryParser.SettlementSummaryParse(acquirerSettlementSection);
         foreach(var a in issuerSettlementSummaries)
         {
-            Console.WriteLine(a.FileHeader + " Issuer" + "|" + a.SettlementCurrency + "|" + a.ChannelType + "|" + a.TransactionType + "|" + a.PresentmentCurrency
+            Console.WriteLine(a.FileHeader + "|" + a.SettlementCurrency + "|" + a.ChannelType + "|" + a.TransactionType + "|" + a.PresentmentCurrency
             + "|" + a.TransactionCount + "|" + a.PresentmentAmount + "|" + a.OutclearAmount + "|" + a.OutclearPosition + "|" + a.InclearAmount
             + "|" + a.InclearPosition + "|" + a.NetAmount + "|" + a.NetPosition);
            // |FileHeader|SettlementCurrency|ChannelType|TranasctionType|PresentmentCurrency|TransactionCount|PresentmentAmount|PresentmentPosition|OutclearAmount|OutclearPosition|InclearAmount|InclearPosition|NetAmount|NetPosition|
@@ -56,7 +56,7 @@ class Program
 
         foreach(var a in acquirerSettlemtnSummaries)
         {
-            Console.WriteLine(a.FileHeader + " Acquirer" + "|" + a.SettlementCurrency + "|" + a.ChannelType + "|" + a.TransactionType + "|" + a.PresentmentCurrency
+            Console.WriteLine(a.FileHeader +  "|" + a.SettlementCurrency + "|" + a.ChannelType + "|" + a.TransactionType + "|" + a.PresentmentCurrency
             + "|" + a.TransactionCount + "|" + a.PresentmentAmount + "|" + a.OutclearAmount + "|" + a.OutclearPosition + "|" + a.InclearAmount
             + "|" + a.InclearPosition + "|" + a.NetAmount + "|" + a.NetPosition);
            // |FileHeader|SettlementCurrency|ChannelType|TranasctionType|PresentmentCurrency|TransactionCount|PresentmentAmount|PresentmentPosition|OutclearAmount|OutclearPosition|InclearAmount|InclearPosition|NetAmount|NetPosition|
