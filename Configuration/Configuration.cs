@@ -34,6 +34,29 @@ public class Configuration
     public int NostroAmountLength {get;} = 19;
 
 
+    public int ChannelTypeStart {get;} = 0;
+    public int ChannelTypeLength {get;} = 3;
+    public int SettlementTranasctionTypeStart {get;} = 1;
+    public int SettlementTranscationTypeLength {get;} = 20 ;
+    public int PresentmentCodeStart {get;} = 24;
+    public int PresentmentCodeLength {get;}= 3;
+    public int SettlementTransactionCountStart {get;} = 32;
+    public int SettlementTransactionCountLength {get;} = 8;
+    public int PresentmentAmountStart {get;} =45;
+    public int PresentmentAmountLength{get;} = 15;
+    public int OutclearAmountStart {get;} = 68;
+    public int OutclearAmountLength {get;} = 16;
+    public int OutClearPositionStart {get;} = 84;
+    public int OutClearPositionLength {get;} = 2;
+    public int InClearPositionStart {get;} = 107;
+    public int InClearPositionLength {get;} = 2;
+    public int InclearAmountStart {get;} = 92;
+    public int InclearAmountLength {get;} = 15;
+    public int NetAmountStart {get;} = 116;
+    public int NetAmountLength {get;} = 14;
+    public int NetPositionStart {get;} = 130;
+    public int NetPositionLength {get;} = 2;
+
 }
 /*
 TOTAL GROSS SETTLEMENT                                       194,149.17CR                                                                                                                                                                                               
