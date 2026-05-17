@@ -1,4 +1,5 @@
 namespace AmexParser;
+
 public class SettlementSummaryParser
 {
     private readonly Configuration _configuration;
@@ -9,27 +10,77 @@ public class SettlementSummaryParser
 
     public List<SettlementSummary> SettlementSummaryParse(List<string> settlementReports)
     {
-        List<SettlementSummary> settlementSummaries =  new List<SettlementSummary>();
-        foreach(var report in settlementReports)
+        string currentSettlementCurrency = "";
+        string currentChannelType = "";
+        string currentTransactionType = "";
+       // bool startOfTransactionDataRow = false;
+        List<SettlementSummary> settlementSummaries = new List<SettlementSummary>();
+        foreach (var currentLine in settlementReports)
         {
-            
+            if (IsSettlementCurrencyHeader(currentLine))
+            {
+                currentSettlementCurrency = GetSettlementCurrency(currentLine);
+                continue;
+            }
+            if (IsChannelTypeHeader(currentLine))
+            {
+                currentChannelType = GetChannelType(currentLine);
+                continue;
+            }
+            if (IsTransactionTypeHeader(currentLine))
+            {
+                currentTransactionType = GetTransactionType(currentLine);
+            }
+            // if (startOfTransactionDataRow && string.IsNullOrWhiteSpace(currentLine) == false )
+            // {
+            //     startOfTransactionDataRow = false;
+            // }
+  
+            if (IsSettlementDataRow(currentLine))
+            {
+                settlementSummaries.Add(new SettlementSummary
+                {
+                    FileHeader = "Settlement Summary",
+                    SettlementCurrency = currentSettlementCurrency,
+                    ChannelType = currentChannelType,
+                    TransactionType = currentTransactionType,
+                    PresentmentCurrency = GetPresentmentCurrency(currentLine),
+                    TransactionCount = GetTransactionCount(currentLine),
+                    PresentmentAmount = GetPresentmentAmount(currentLine),
+                    //PresentmentPosition = 
+                    OutclearAmount = GetOutClearAmount(currentLine),
+                    OutclearPosition = GetOutClearPosition(currentLine),
+                    InclearAmount = GetInclearAmount(currentLine),
+                    InclearPosition = GetInclearPosition(currentLine),
+                    NetAmount = GetNetAmount(currentLine),
+                    NetPosition = GetNetPosition(currentLine)
+
+                });
+            }
         }
         return settlementSummaries;
     }
 
-    public bool IsTransactionTypeHeader(string line) => line.Contains("PRESENTMENT") || line.Contains("CHARGEBACK");
-    public bool IsChannelTypeHeader(string line) => line.Contains("POS") || line.Contains("ATM");
+    public bool IsTransactionTypeHeader(string line) => line.Contains("1ST PRESENTMENT") || line.Contains("CHARGEBACK") || line.Contains("CASH") || line.Contains("ATM ACQUIRER FEES");
+    public bool IsChannelTypeHeader(string line) => line.Trim().Contains("POS") || line.Trim().Contains("ATM");
     public bool IsSettlementCurrencyHeader(string line) => line.Contains("SETTLEMENT CURRENCY CODE");
-    public string GetSettlementCurrency(string line) => line.Substring(_configuration.SettlementCurrencyStart,_configuration.SettlementCurrencyLength).Trim();
-    public string GetChannelType(string line) => line.Substring(_configuration.ChannelTypeStart,_configuration.ChannelTypeLength).Trim();
-    public string GetTransactionType(string line) =>  line.Substring(_configuration.SettlementTranasctionTypeStart, _configuration.SettlementTranscationTypeLength).Trim();
+    public string GetSettlementCurrency(string line) => line.Substring(_configuration.SettlementCurrencyStart, _configuration.SettlementCurrencyLength).Trim();
+    public string GetChannelType(string line) => line.Substring(_configuration.ChannelTypeStart, _configuration.ChannelTypeLength).Trim();
+    public string GetTransactionType(string line) => line.Substring(_configuration.SettlementTranasctionTypeStart, _configuration.SettlementTranscationTypeLength).Trim();
     public string GetPresentmentCurrency(string line) => line.Substring(_configuration.PresentmentCodeStart, _configuration.PresentmentCodeLength).Trim();
     public int GetTransactionCount(string line) => int.Parse(line.Substring(_configuration.SettlementTransactionCountStart, _configuration.SettlementTransactionCountLength).Trim());
-    public double GetPresentmentAmount(string line) => double.Parse(line.Substring(_configuration.PresentmentAmountStart,_configuration.PresentmentAmountLength).Trim());
-    public double GetOutClearAmount(string line) => double.Parse(line.Substring(_configuration.OutclearAmountStart,  _configuration.OutclearAmountLength).Trim());
+    public double GetPresentmentAmount(string line) => double.Parse(line.Substring(_configuration.PresentmentAmountStart, _configuration.PresentmentAmountLength).Trim());
+    public double GetOutClearAmount(string line) => double.Parse(line.Substring(_configuration.OutclearAmountStart, _configuration.OutclearAmountLength).Trim());
     public string GetOutClearPosition(string line) => line.Substring(_configuration.OutClearPositionStart, _configuration.OutClearPositionLength).Trim();
     public double GetInclearAmount(string line) => double.Parse(line.Substring(_configuration.InclearAmountStart, _configuration.InclearAmountLength).Trim());
     public string GetInclearPosition(string line) => line.Substring(_configuration.InClearPositionStart, _configuration.InClearPositionLength).Trim();
     public double GetNetAmount(string line) => double.Parse(line.Substring(_configuration.NetAmountStart, _configuration.NetAmountLength).Trim());
+    public string GetNetPosition(string line) => line.Substring(_configuration.NetPositionStart, _configuration.NetPositionLength).Trim();
+
+    public bool IsSettlementDataRow(string line)
+    {
+        string transactionCount = line.Substring(_configuration.SettlementTransactionCountStart,_configuration.SettlementTransactionCountLength).Trim();
+        return int.TryParse(transactionCount, out _);
+    }
 
 }
