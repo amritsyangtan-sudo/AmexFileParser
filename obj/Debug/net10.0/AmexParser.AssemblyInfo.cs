@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AmexParser")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+456975214d59533b41e92699bc997768cd2957e0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bbde70414ceb6b509189b06f7ebc16c098272d75")]
 [assembly: System.Reflection.AssemblyProductAttribute("AmexParser")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AmexParser")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
