@@ -37,10 +37,10 @@ class Program
         }
         Console.WriteLine("--------------------------------------------------------------------------------------------");
 
-        foreach(var a in issuerSettlementSection)
-        {
-            Console.WriteLine(a);
-        }
+        // foreach(var a in issuerSettlementSection)
+        // {
+        //     Console.WriteLine(a);
+        // }
 
         List<SettlementSummary> issuerSettlementSummaries = settlementSummaryParser.SettlementSummaryParse(issuerSettlementSection);
         List<SettlementSummary> acquirerSettlemtnSummaries = settlementSummaryParser.SettlementSummaryParse(acquirerSettlementSection);
@@ -52,6 +52,7 @@ class Program
            // |FileHeader|SettlementCurrency|ChannelType|TranasctionType|PresentmentCurrency|TransactionCount|PresentmentAmount|PresentmentPosition|OutclearAmount|OutclearPosition|InclearAmount|InclearPosition|NetAmount|NetPosition|
 
         }
+
         Console.WriteLine("--------------------------------------------------------------------------------------------");
 
         foreach(var a in acquirerSettlemtnSummaries)
@@ -62,6 +63,7 @@ class Program
            // |FileHeader|SettlementCurrency|ChannelType|TranasctionType|PresentmentCurrency|TransactionCount|PresentmentAmount|PresentmentPosition|OutclearAmount|OutclearPosition|InclearAmount|InclearPosition|NetAmount|NetPosition|
 
         }
+        Console.WriteLine("--------------------------------------------------------------------------------------------");
 
     }
 }

@@ -16,7 +16,7 @@ public class FileTrackingParser
         {
             if (IsFileTypeHeader(currentLine))
             {
-                currentFileType = currentLine.Substring(_configuration.FileTypeStart, _configuration.FileTypeLength).Trim();
+                currentFileType = StringExtractor.SafeExtract(currentLine, _configuration.FileTypeStart, _configuration.FileTypeLength, "FileType");
                 continue;
             }
 
@@ -26,17 +26,24 @@ public class FileTrackingParser
             }
             if (IsDataRow(currentLine))
             {
-                //fileTrackingRecords
-                fileTrackingRecords.Add(new FileTracking
+                try
                 {
-                    FileHeader = "File Tracking",
-                    FileType = currentFileType.Trim(),
-                    ProcessorId = currentLine.Substring(_configuration.ProcessIdStart, _configuration.ProcessIdLength).Trim(),
-                    SequenceNumber = currentLine.Substring(_configuration.SequenceStart, _configuration.SequenceLength).Trim(),
-                    ClaimDate = currentLine.Substring(_configuration.ClaimDateStart, _configuration.ClaimDateLength).Trim(),
-                    Status = currentLine.Substring(_configuration.StatusStart, _configuration.StatusLength).Trim(),
-                    TransactionCount = int.Parse(currentLine.Substring(_configuration.TransactionCountStart, _configuration.TransactionCountLength).Trim())
-                });
+                    fileTrackingRecords.Add(new FileTracking
+                    {
+                        FileHeader = "File Tracking",
+                        FileType = currentFileType.Trim(),
+                        ProcessorId = StringExtractor.SafeExtract(currentLine, _configuration.ProcessIdStart, _configuration.ProcessIdLength, "ProcessorId"),
+                        SequenceNumber = StringExtractor.SafeExtract(currentLine, _configuration.SequenceStart, _configuration.SequenceLength, "SequenceNumber"),
+                        ClaimDate = StringExtractor.SafeExtract(currentLine, _configuration.ClaimDateStart, _configuration.ClaimDateLength, "ClaimDate"),
+                        Status = StringExtractor.SafeExtract(currentLine, _configuration.StatusStart, _configuration.StatusLength, "Status"),
+                        TransactionCount = StringExtractor.TryExtractInt(currentLine, _configuration.TransactionCountStart, _configuration.TransactionCountLength, "TransactionCount", out int count) ? count : 0
+                    });
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine($"Warning: Failed to parse FileTracking row: {ex.Message}");
+                    continue;
+                }
             }
 
         }

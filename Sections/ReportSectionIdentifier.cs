@@ -26,14 +26,22 @@ public class ReportSectionIdentifier
             }
             if(isInReportSection && line.Contains("SECTION ID"))
             {
-                string currentSectionId = line.Substring(15,3).Trim();
-                if(string.IsNullOrWhiteSpace(initialSectionId))
+                try
                 {
-                    initialSectionId = currentSectionId;
+                    string currentSectionId = StringExtractor.SafeExtract(line, 15, 3, "SectionId");
+                    if(string.IsNullOrWhiteSpace(initialSectionId))
+                    {
+                        initialSectionId = currentSectionId;
+                    }
+                    else if(currentSectionId != initialSectionId)
+                    {
+                        break;
+                    }
                 }
-                else if(currentSectionId != initialSectionId)
+                catch (ArgumentException ex)
                 {
-                    break;
+                    Console.WriteLine($"Warning: {ex.Message}");
+                    continue;
                 }
             }
 

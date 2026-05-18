@@ -26,22 +26,25 @@ public class NostroParser
             
             if (nostroLine.Contains("SETTLEMENT CURRENCY CODE"))
             {
-                settlementCurrency = nostroLine.Substring(_configuration.SettlementCurrencyStart,_configuration.SettlementCurrencyLength).Trim();
+                settlementCurrency = StringExtractor.SafeExtract(nostroLine, _configuration.SettlementCurrencyStart,_configuration.SettlementCurrencyLength, "SettlementCurrency");
             }    
             if (nostroLine.Contains("TOTAL GROSS SETTLEMENT"))
             {
-                grossSettlement = double.Parse(nostroLine.Substring(_configuration.NostroAmountStart,_configuration.NostroAmountLength).Trim());
-                grossSettlementPosition = GetNostroPosition(nostroLine.Substring(_configuration.NostroPositionStart, _configuration.NostroPositionLength));
+                if (StringExtractor.TryExtractDouble(nostroLine, _configuration.NostroAmountStart,_configuration.NostroAmountLength, "GrossSettlement", out double amount))
+                    grossSettlement = amount;
+                grossSettlementPosition = GetNostroPosition(StringExtractor.SafeExtract(nostroLine, _configuration.NostroPositionStart, _configuration.NostroPositionLength, "GrossSettlementPosition"));
             }    
             if (nostroLine.Contains("TOTAL PASS THROUGH FEES"))
             {
-                passThroughFees = double.Parse(nostroLine.Substring(_configuration.NostroAmountStart,_configuration.NostroAmountLength).Trim());
-                passThroughFeesPosition = GetNostroPosition(nostroLine.Substring(_configuration.NostroPositionStart, _configuration.NostroPositionLength));
+                if (StringExtractor.TryExtractDouble(nostroLine, _configuration.NostroAmountStart,_configuration.NostroAmountLength, "PassThroughFees", out double amount))
+                    passThroughFees = amount;
+                passThroughFeesPosition = GetNostroPosition(StringExtractor.SafeExtract(nostroLine, _configuration.NostroPositionStart, _configuration.NostroPositionLength, "PassThroughFeesPosition"));
             }    
             if (nostroLine.Contains("TOTAL NETWORK FEES"))
             {
-                networkFees = double.Parse(nostroLine.Substring(_configuration.NostroAmountStart,_configuration.NostroAmountLength).Trim());
-                networkFeesPosition = GetNostroPosition(nostroLine.Substring(_configuration.NostroPositionStart, _configuration.NostroPositionLength));
+                if (StringExtractor.TryExtractDouble(nostroLine, _configuration.NostroAmountStart,_configuration.NostroAmountLength, "NetworkFees", out double amount))
+                    networkFees = amount;
+                networkFeesPosition = GetNostroPosition(StringExtractor.SafeExtract(nostroLine, _configuration.NostroPositionStart, _configuration.NostroPositionLength, "NetworkFeesPosition"));
             }    
             if (nostroLine.Contains("TOTAL ISSUER'S/NETWORK RATE AMOUNT"))
             {
