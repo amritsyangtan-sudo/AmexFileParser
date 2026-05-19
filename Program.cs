@@ -44,6 +44,8 @@ class Program
 
         List<SettlementSummary> issuerSettlementSummaries = settlementSummaryParser.SettlementSummaryParse(issuerSettlementSection);
         List<SettlementSummary> acquirerSettlemtnSummaries = settlementSummaryParser.SettlementSummaryParse(acquirerSettlementSection);
+        SettlementSummarizer settlementSummarizers = new SettlementSummarizer();
+  
         foreach(var a in issuerSettlementSummaries)
         {
             Console.WriteLine(a.FileHeader + "|" + a.SettlementCurrency + "|" + a.ChannelType + "|" + a.TransactionType + "|" + a.PresentmentCurrency
@@ -64,6 +66,13 @@ class Program
 
         }
         Console.WriteLine("--------------------------------------------------------------------------------------------");
+
+       List<SettlementGroupCategory> settlementGroupCategories =  settlementSummarizers.SummarizeSettlement(acquirerSettlemtnSummaries);
+       foreach(var groupCategory in settlementGroupCategories)
+        {
+            Console.WriteLine(groupCategory.EntityType + "|" + groupCategory.SettlementCurrency  + "|" + groupCategory.Channel 
+             + "|" + groupCategory.TransactionType  + "|" + groupCategory.TotalAmount);
+        }
 
     }
 }
