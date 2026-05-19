@@ -25,19 +25,19 @@ public class SettlementSummarizer
 
             if (existingGroup == null)
             {
-                SettlementGroupCategory newGroup = new SettlementGroupCategory();
-
-                newGroup.EntityType = settlementSummary.FileHeader;
-                newGroup.SettlementCurrency = settlementSummary.SettlementCurrency;
-                newGroup.Channel = settlementSummary.ChannelType;
-                newGroup.TransactionType = settlementSummary.TransactionType;
-                newGroup.TotalAmount = settlementSummary.InclearAmount;
-                newGroup.Position = settlementSummary.InclearPosition;
-                settlementGroupCategories.Add(newGroup);
+                settlementGroupCategories.Add(new SettlementGroupCategory
+                {
+                    EntityType = settlementSummary.FileHeader,
+                    SettlementCurrency = settlementSummary.SettlementCurrency,
+                    Channel = settlementSummary.ChannelType,
+                    TransactionType = settlementSummary.TransactionType,
+                    TotalAmount = settlementSummary.OutclearAmount,
+                    Position = settlementSummary.OutclearPosition
+                });
             }
             else
             {
-                existingGroup.TotalAmount += settlementSummary.InclearAmount;
+                existingGroup.TotalAmount += settlementSummary.OutclearAmount;
             }
         }
 
