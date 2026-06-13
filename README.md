@@ -38,7 +38,7 @@ AmexFileParser/
 
 ```
 ┌─────────────────────┐
-│   Raw DAR File      │  Fixed-width text report from AMEX
+│   Raw  File         │  Fixed-width text report from AMEX
 └────────┬────────────┘
          │
          ▼
