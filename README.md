@@ -2,7 +2,7 @@
 
 #AmexFileParser
 
-**A C# console application that parses AMEX DAR (Data Acceptance Report)**  
+**A C# console application that parses AMEX Report**  
 **fixed-width settlement files into structured data.**
 
 ![Language](https://img.shields.io/badge/Language-C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
